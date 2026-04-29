@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "417162787841",
+    "project_id": "socialappflutter-3653b",
+    "storage_bucket": "socialappflutter-3653b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417162787841:android:af7c175e9ef24e6b909400",
+        "android_client_info": {
+          "package_name": "com.example.socmed_app_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj2JCe1ScxV_MvfEBW4MGMCTwLCHhYbFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

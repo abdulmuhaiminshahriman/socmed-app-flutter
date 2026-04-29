@@ -1,0 +1,25 @@
+import 'package:socmed_app_flutter/features/auth/domain/entities/app_user.dart';
+
+abstract class AuthState {}
+
+// initial state
+class AuthInitial extends AuthState {}
+
+// loading state
+class AuthLoading extends AuthState {}
+
+// authenticated state
+class Authenticated extends AuthState {
+  final AppUser user;
+
+  Authenticated(this.user);
+}
+
+// unauthenticated state
+class Unauthenticated extends AuthState {}
+
+// error state
+class AuthError extends AuthState {
+  final String error;
+  AuthError(this.error);
+}
