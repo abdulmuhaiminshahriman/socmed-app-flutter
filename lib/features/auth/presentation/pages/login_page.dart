@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:socmed_app_flutter/features/auth/presentation/components/my_text_field.dart';
 import 'package:socmed_app_flutter/features/auth/presentation/components/my_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socmed_app_flutter/features/auth/presentation/cubits/auth_cubit.dart';
 
- class LoginPage extends StatefulWidget {
-  final void Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+class LoginPage extends StatefulWidget {
+  final void Function()? togglePage;
+  const LoginPage({super.key, required this.togglePage});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -13,7 +15,29 @@ import 'package:socmed_app_flutter/features/auth/presentation/components/my_butt
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final pwController = TextEditingController();
-  
+
+  void login() {
+    final String email = emailController.text.trim();
+    final String password = pwController.text.trim();
+
+    final authCubit = context.read<AuthCubit>();
+
+    if (email.isNotEmpty && password.isNotEmpty) {
+      authCubit.login(email, password);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter email and password')),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    pwController.dispose();
+    super.dispose();
+  }
+
   // Build UI
   @override
   Widget build(BuildContext context) {
@@ -69,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
 
                   // Login button
-                  MyButton(text: 'Login', onTap: () {}), 
+                  MyButton(text: 'Login', onTap: login),
 
                   const SizedBox(height: 50),
 
@@ -83,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: widget.onTap,
+                        onTap: widget.togglePage,
                         child: Text(
                           ' Register now!',
                           style: TextStyle(

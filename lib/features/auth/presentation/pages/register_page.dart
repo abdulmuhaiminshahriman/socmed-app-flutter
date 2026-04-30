@@ -3,7 +3,8 @@ import 'package:socmed_app_flutter/features/auth/presentation/components/my_text
 import 'package:socmed_app_flutter/features/auth/presentation/components/my_button.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final void Function()? togglePage;
+  const RegisterPage({super.key, required this.togglePage});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -90,12 +91,32 @@ class _RegisterPageState extends State<RegisterPage> {
                   // Register button
                   MyButton(
                     text: 'Register',
-                    onTap: () {},
+                    onTap: widget.togglePage,
                   ),
 
                   const SizedBox(height: 50),
 
-                  Text('Already a member? Login now!', style: TextStyle(color: Theme.of(context).colorScheme.primary),)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already a member?',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: widget.togglePage,
+                        child: Text(
+                          ' Login now!',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
