@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:socmed_app_flutter/features/auth/presentation/components/my_text_field.dart';
 import 'package:socmed_app_flutter/features/auth/presentation/components/my_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socmed_app_flutter/features/auth/presentation/cubits/auth_cubit.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? togglePage;
@@ -15,6 +17,39 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final pwController = TextEditingController();
   final confirmPwController = TextEditingController();
+
+  void register() {
+    final String name = nameController.text.trim();
+    final String email = emailController.text.trim();
+    final String password = pwController.text.trim();
+    final String confirmPassword = confirmPwController.text.trim();
+
+    final authCubit = context.read<AuthCubit>();
+
+    // esnure the password is not empty
+    if (email.isNotEmpty && password.isNotEmpty && confirmPassword.isNotEmpty) {
+      if (password == confirmPassword) {
+        authCubit.register(name, email, password);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Password does not match')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter email and password')),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    pwController.dispose();
+    confirmPwController.dispose();
+    super.dispose();
+  }
 
   // Build UI
   @override
@@ -91,7 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   // Register button
                   MyButton(
                     text: 'Register',
-                    onTap: widget.togglePage,
+                    onTap: register,
                   ),
 
                   const SizedBox(height: 50),

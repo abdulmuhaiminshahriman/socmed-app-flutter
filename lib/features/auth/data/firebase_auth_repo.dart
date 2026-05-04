@@ -1,10 +1,11 @@
 import 'package:socmed_app_flutter/features/auth/domain/entities/app_user.dart';
 import 'package:socmed_app_flutter/features/auth/domain/repos/auth_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseAuthRepo implements AuthRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
+  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   @override
   Future<AppUser?> loginWithEmailAndPassword(
     String email,
@@ -19,6 +20,8 @@ class FirebaseAuthRepo implements AuthRepo {
         email: email,
         name: '',
       );
+
+      await firebaseFirestore.collection('users').doc(user.uuid).set(user.toJson());
 
       return user;
     } catch (e) {

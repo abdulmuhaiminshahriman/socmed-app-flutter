@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:socmed_app_flutter/app.dart';
-import 'package:socmed_app_flutter/firebase_options.dart';
+import '../ios/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

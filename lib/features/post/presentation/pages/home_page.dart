@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socmed_app_flutter/features/auth/presentation/cubits/auth_cubit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,8 +13,10 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-            }, 
-            icon: Icon(Icons.logout)),
+              context.read<AuthCubit>().logout();
+            },
+            icon: Icon(Icons.logout),
+          ),
         ],
       ),
     );

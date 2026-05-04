@@ -61,7 +61,13 @@ class MyApp extends StatelessWidget {
             }
 
           },
-           listener: (context, state) {},
+           listener: (context, state) {
+            if (state is AuthError) {
+              ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.error)),
+              );
+            }
+           },
         ),
       ),
     );
