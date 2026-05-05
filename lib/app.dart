@@ -5,7 +5,7 @@ import 'package:socmed_app_flutter/themes/light_mode.dart';
 import 'package:socmed_app_flutter/features/auth/presentation/pages/auth_page.dart';
 import 'package:socmed_app_flutter/features/auth/data/firebase_auth_repo.dart';
 import 'package:socmed_app_flutter/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:socmed_app_flutter/features/post/presentation/pages/home_page.dart';
+import 'package:socmed_app_flutter/features/home/presentation/pages/home_page.dart';
 
 /* 
 
