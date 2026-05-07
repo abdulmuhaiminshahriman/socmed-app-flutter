@@ -1,4 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart'
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:socmed_app_flutter/features/profile/presentation/cubits/profile_states.dart';
 import 'package:socmed_app_flutter/features/profile/domain/repos/profile_repo.dart';
 
@@ -37,6 +37,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       // update new profile
       final updatedProfile = currentUser.copyWith(newBio: newBio ?? currentUser.bio);
+      await profileRepo.updateProfile(updatedProfile);
 
       // re-fetch the updated profile
       await fetchUserProfile(uuid);
